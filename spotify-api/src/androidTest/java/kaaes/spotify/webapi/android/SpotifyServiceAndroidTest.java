@@ -30,6 +30,7 @@ import kaaes.spotify.webapi.android.models.AudioFeaturesTracks;
 import kaaes.spotify.webapi.android.models.Pager;
 import kaaes.spotify.webapi.android.models.Playlist;
 import kaaes.spotify.webapi.android.models.PlaylistSimple;
+import kaaes.spotify.webapi.android.models.RecentTrack;
 import kaaes.spotify.webapi.android.models.Recommendations;
 import kaaes.spotify.webapi.android.models.Track;
 import kaaes.spotify.webapi.android.models.Tracks;
@@ -270,6 +271,22 @@ public class SpotifyServiceAndroidTest {
                 .get()
                 .headers(mAuthHeader)
                 .url("https://api.spotify.com/v1/me/top/tracks")
+                .build();
+
+        Response response = mClient.newCall(request).execute();
+        assertEquals(200, response.code());
+
+        assertThat(payload, JsonEquals.jsonEquals(response.body().string()));
+    }
+
+    @Test
+    public void getUserRecentlyPlayed() throws Exception {
+        Pager<RecentTrack> payload = mService.getRecentlyPlayed();
+
+        Request request = new Request.Builder()
+                .get()
+                .headers(mAuthHeader)
+                .url("http://api.spotify.com/v1/me/player/recently-played")
                 .build();
 
         Response response = mClient.newCall(request).execute();

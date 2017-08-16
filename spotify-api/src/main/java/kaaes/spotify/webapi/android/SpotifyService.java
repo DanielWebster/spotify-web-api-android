@@ -22,6 +22,7 @@ import kaaes.spotify.webapi.android.models.PlaylistFollowPrivacy;
 import kaaes.spotify.webapi.android.models.PlaylistSimple;
 import kaaes.spotify.webapi.android.models.PlaylistTrack;
 import kaaes.spotify.webapi.android.models.PlaylistsPager;
+import kaaes.spotify.webapi.android.models.RecentTrack;
 import kaaes.spotify.webapi.android.models.Recommendations;
 import kaaes.spotify.webapi.android.models.Result;
 import kaaes.spotify.webapi.android.models.SavedAlbum;
@@ -1810,4 +1811,41 @@ public interface SpotifyService {
     @GET("/me/top/tracks")
     void getTopTracks(@QueryMap Map<String, Object> options, Callback<Pager<Track>> callback);
 
+    /**
+     * Get tracks from the current user’s recently played tracks.
+     *
+     * @return The objects whose response body contains an artists or tracks object.
+     * The object in turn contains a paging object of Artists or Tracks
+     */
+    @GET("/me/player/recently-played")
+    Pager<RecentTrack> getRecentlyPlayed();
+
+    /**
+     * Get tracks from the current user’s recently played tracks.
+     *
+     * @param callback callback method
+     */
+    @GET("/me/player/recently-played")
+    void getRecentlyPlayed(Callback<Pager<RecentTrack>> callback);
+
+    /**
+     * Get tracks from the current user’s recently played tracks.
+     *
+     * @param options Optional parameters. For list of available parameters see
+     *                <a href="https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/">endpoint documentation</a>
+     * @return The objects whose response body contains an artists or tracks object.
+     * The object in turn contains a paging object of Artists or Tracks
+     */
+    @GET("/me/player/recently-played")
+    Pager<RecentTrack> getRecentlyPlayed(@QueryMap Map<String, Object> options);
+
+    /**
+     *Get tracks from the current user’s recently played tracks.
+     *
+     * @param options  Optional parameters. For list of available parameters see
+     *                 <a href="https://developer.spotify.com/web-api/web-api-personalization-endpoints/get-recently-played/">endpoint documentation</a>
+     * @param callback Callback method
+     */
+    @GET("/me/player/recently-played")
+    void getRecentlyPlayed(@QueryMap Map<String, Object> options, Callback<Pager<RecentTrack>> callback);
 }

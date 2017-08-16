@@ -57,4 +57,12 @@ android.testOptions.unitTests.all {
     }
 }
 
-
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            groupId "com.github.kaaes"
+            artifactId "spotify-web-api-android"
+            version "0.0.1-SNAPSHOT"
+        }
+    }
+}
